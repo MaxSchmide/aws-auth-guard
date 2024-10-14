@@ -1,0 +1,1 @@
+# @hatkom/aws-auth-guard
