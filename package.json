@@ -1,6 +1,6 @@
 {
   "name": "@hatkom/aws-auth-module",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "main": "dist/index.js",
   "author": "Max Schmide",
   "license": "MIT",
