@@ -1,17 +1,17 @@
 {
-  "name": "@hatkom/aws-auth-guard",
+  "name": "@hatkom/aws-auth-module",
   "version": "1.0.0",
   "main": "dist/index.js",
   "author": "Max Schmide",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hatkom-io/aws-auth-guard.git"
+    "url": "git+https://github.com/Hatkom-io/aws-auth-module.git"
   },
   "bugs": {
-    "url": "https://github.com/Hatkom-io/aws-auth-guard/issues"
+    "url": "https://github.com/Hatkom-io/aws-auth-module/issues"
   },
-  "homepage": "https://github.com/Hatkom-io/aws-auth-guard#readme",
+  "homepage": "https://github.com/Hatkom-io/aws-auth-module#readme",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "bump": "bunx npm-check-updates -u --deep -p bun && bun i && bun update"
