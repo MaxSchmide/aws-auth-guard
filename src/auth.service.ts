@@ -20,7 +20,7 @@ export class AuthService<U> {
     this.verifier = CognitoJwtVerifier.create({
       userPoolId: authOptions.credentials.userPoolId,
       tokenUse: 'access',
-      clientId: authOptions.credentials.userPoolId,
+      clientId: authOptions.credentials.userPoolClientAppId,
     })
   }
 
