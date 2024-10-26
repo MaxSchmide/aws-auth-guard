@@ -1,16 +1,25 @@
 import {
   CanActivate,
+  CustomDecorator,
   ExecutionContext,
   Injectable,
   InternalServerErrorException,
+  SetMetadata,
 } from '@nestjs/common'
 import { GqlExecutionContext } from '@nestjs/graphql'
-import _ from 'lodash'
 import { AuthService } from './auth.service'
 import { DefaultContextType } from './types'
 
+const isPublicKey = 'isPublic'
+
+const isObject = (value: unknown): value is object =>
+  value !== null &&
+  typeof value === 'object' &&
+  !Array.isArray(value) &&
+  typeof value !== 'function'
+
 const hasRequest = <T>(obj: unknown): obj is { req: T } =>
-  _.isObject(obj) && 'req' in obj && !!obj.req
+  isObject(obj) && 'req' in obj && !!obj.req
 
 const getRequest = <T>(context: ExecutionContext): T => {
   const ctx = GqlExecutionContext.create(context).getContext<unknown>()
@@ -47,3 +56,6 @@ export class AuthGuard<U extends object, C extends DefaultContextType<U>>
     return !!request.user
   }
 }
+
+export const Public = (): CustomDecorator<string> =>
+  SetMetadata(isPublicKey, true)
