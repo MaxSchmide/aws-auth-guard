@@ -1,3 +1,3 @@
-export { AuthGuard, Public } from './auth.guard'
-export { AuthService } from './auth.service'
+export { Public } from './auth.guard'
 export { AuthModule } from './auth.module'
+export { GetUser } from './decorators'
