@@ -3,8 +3,8 @@ import {
   CognitoJwtVerifier,
   CognitoJwtVerifierSingleUserPool,
 } from 'aws-jwt-verify/cognito-verifier'
-import { AuthOptions } from './types'
 import { AUTH_OPTIONS } from './constants'
+import { AuthOptions } from './types'
 
 @Injectable()
 export class AuthService<U> {
@@ -18,9 +18,9 @@ export class AuthService<U> {
     @Inject(AUTH_OPTIONS) private readonly authOptions: AuthOptions<U>,
   ) {
     this.verifier = CognitoJwtVerifier.create({
-      userPoolId: this.authOptions.credentials.userPoolId,
+      userPoolId: authOptions.credentials.userPoolId,
       tokenUse: 'access',
-      clientId: this.authOptions.credentials.userPoolId,
+      clientId: authOptions.credentials.userPoolId,
     })
   }
 
