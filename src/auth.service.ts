@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import {
   CognitoJwtVerifier,
   CognitoJwtVerifierSingleUserPool,
 } from 'aws-jwt-verify/cognito-verifier'
-import { FindUserFn } from './types'
+import { AuthOptions } from './types'
+import { AUTH_OPTIONS } from './constants'
 
 @Injectable()
 export class AuthService<U> {
@@ -14,20 +15,18 @@ export class AuthService<U> {
   }>
 
   constructor(
-    private readonly findUser: FindUserFn<U>,
-    private readonly userPoolId: string,
-    private readonly userPoolClientAppId: string,
+    @Inject(AUTH_OPTIONS) private readonly authOptions: AuthOptions<U>,
   ) {
     this.verifier = CognitoJwtVerifier.create({
-      userPoolId: this.userPoolId,
+      userPoolId: this.authOptions.credentials.userPoolId,
       tokenUse: 'access',
-      clientId: this.userPoolClientAppId,
+      clientId: this.authOptions.credentials.userPoolId,
     })
   }
 
   validateToken = async (token: string): Promise<U | null> => {
     const { sub } = await this.verifier.verify(token)
 
-    return this.findUser({ cognitoId: sub })
+    return this.authOptions.findUser({ cognitoId: sub })
   }
 }

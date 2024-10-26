@@ -2,32 +2,31 @@ import { DynamicModule, Module } from '@nestjs/common'
 import { APP_GUARD } from '@nestjs/core'
 import { AuthGuard } from './auth.guard'
 import { AuthService } from './auth.service'
-import { DefaultContextType, DefaultModuleOptions } from './types'
+import { AUTH_OPTIONS } from './constants'
+import { AuthContext, AuthModuleOptions } from './types'
 
 @Module({})
 export class AuthModule {
-  static forRootAsync<
-    U extends object,
-    C extends DefaultContextType<U>,
-    TOptions extends DefaultModuleOptions<U>,
-  >({ credentials, findUser }: TOptions): DynamicModule {
+  public static forRootAsync<
+    User extends object,
+    Context extends AuthContext<User>,
+  >(options: AuthModuleOptions<User>): DynamicModule {
     return {
       module: AuthModule,
       providers: [
         {
-          provide: APP_GUARD,
-          useClass: AuthGuard<U, C>,
+          provide: AUTH_OPTIONS,
+          useFactory: options.useFactory,
+          inject: options.inject,
         },
+        AuthService<User>,
         {
-          provide: AuthService<U>,
-          useFactory: () =>
-            new AuthService(
-              findUser,
-              credentials.userPoolId,
-              credentials.userPoolClientAppId,
-            ),
+          provide: APP_GUARD,
+          useClass: AuthGuard<User, Context>,
         },
       ],
+      imports: options.imports || [],
+      exports: [AuthService],
     }
   }
 }

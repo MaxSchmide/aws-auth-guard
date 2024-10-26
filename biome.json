@@ -5,6 +5,7 @@
       "style": {
         "useImportType": "off"
       },
+      "suspicious": { "noExplicitAny": "off" },
       "complexity": {
         "noForEach": "off",
         "noStaticOnlyClass": "off"

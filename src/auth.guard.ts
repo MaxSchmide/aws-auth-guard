@@ -8,9 +8,8 @@ import {
 } from '@nestjs/common'
 import { GqlExecutionContext } from '@nestjs/graphql'
 import { AuthService } from './auth.service'
-import { DefaultContextType } from './types'
-
-const isPublicKey = 'isPublic'
+import { isPublicKey } from './constants'
+import { AuthContext } from './types'
 
 const isObject = (value: unknown): value is object =>
   value !== null &&
@@ -32,7 +31,7 @@ const getRequest = <T>(context: ExecutionContext): T => {
 }
 
 @Injectable()
-export class AuthGuard<U extends object, C extends DefaultContextType<U>>
+export class AuthGuard<U extends object, C extends AuthContext<U>>
   implements CanActivate
 {
   constructor(private readonly authService: AuthService<U>) {}
