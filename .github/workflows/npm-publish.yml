@@ -14,13 +14,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Bun
-        run: |
-          curl https://bun.sh/install | bash
-          export BUN_INSTALL="$HOME/.bun"
-          export PATH="$BUN_INSTALL/bin:$PATH"
-          echo "$BUN_INSTALL/bin" >> $GITHUB_PATH
-          bun --version
-
+        uses: oven-sh/setup-bun@v2
+        
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -34,5 +29,5 @@ jobs:
 
       - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: bun publish --access public

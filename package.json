@@ -1,7 +1,7 @@
 {
   "name": "@hatkom/aws-auth-guard",
-  "version": "1.0.1",
-  "main": "dist/index.ts",
+  "version": "1.0.2",
+  "main": "dist/index.js",
   "author": "Max Schmide",
   "license": "MIT",
   "repository": {
