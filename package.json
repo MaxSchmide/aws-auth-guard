@@ -6,12 +6,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MaxSchmide/aws-auth-guard.git"
+    "url": "git+https://github.com/Hatkom-io/aws-auth-guard.git"
   },
   "bugs": {
-    "url": "https://github.com/MaxSchmide/aws-auth-guard/issues"
+    "url": "https://github.com/Hatkom-io/aws-auth-guard/issues"
   },
-  "homepage": "https://github.com/MaxSchmide/aws-auth-guard#readme",
+  "homepage": "https://github.com/Hatkom-io/aws-auth-guard#readme",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "bump": "bunx npm-check-updates -u --deep -p bun && bun i && bun update"
